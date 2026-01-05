@@ -401,8 +401,8 @@ function App() {
   const [showSidebar, setShowSidebar] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
-  const [stocks, setStocks] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [stocks, setStocks] = useState(generateMockStocks()); // Start with mock data immediately
+  const [loading, setLoading] = useState(false); // Don't show loading on updates
 
   const categories = ['All', ...new Set(ALL_LLMS.map(llm => llm.category))].sort();
 
@@ -415,7 +415,7 @@ function App() {
   useEffect(() => {
     const fetchStocks = async () => {
       try {
-        setLoading(true);
+        // Don't show loading state on background updates
         
         // Using Finnhub API for real-time stock data
         const API_KEY = 'ct9pr41r01qnhfe93jagct9pr41r01qnhfe93jb0'; // Free demo key
@@ -459,26 +459,22 @@ function App() {
           }
         }
         
-        // If we got real data, use it; otherwise fall back to mock
+        // Only update if we got fresh data, otherwise keep existing
         if (stockData.length > 0) {
-          console.log(`Fetched ${stockData.length} real-time stocks`);
+          console.log(`Updated with ${stockData.length} real-time stocks`);
           setStocks(stockData);
-        } else {
-          console.log('API failed, using mock data');
-          setStocks(generateMockStocks());
         }
         
-        setLoading(false);
       } catch (error) {
         console.error('Error fetching stock data:', error);
-        setStocks(generateMockStocks());
-        setLoading(false);
+        // Keep existing data on error
       }
     };
 
+    // Fetch immediately in background
     fetchStocks();
     // Update every 60 seconds for real-time data
-    const interval = setInterval(fetchStocks, 100000);
+    const interval = setInterval(fetchStocks, 60000);
     return () => clearInterval(interval);
   }, []);
 
@@ -693,9 +689,7 @@ function App() {
       {/* Bottom Stock Ticker */}
       <div className="h-10 bg-gray-900 overflow-hidden relative border-t border-gray-700">
         <div className="absolute inset-0 flex items-center">
-          {loading ? (
-            <div className="w-full text-center text-gray-400 text-sm">Loading market data...</div>
-          ) : stocks.length > 0 ? (
+          {stocks.length > 0 && (
             <div className="flex animate-scroll-reverse whitespace-nowrap">
               {[...stocks, ...stocks, ...stocks, ...stocks, ...stocks].map((stock, index) => (
                 <div key={`${stock.symbol}-${index}`} className="inline-flex items-center gap-2 px-4 py-1 mx-2 text-sm">
@@ -708,8 +702,6 @@ function App() {
                 </div>
               ))}
             </div>
-          ) : (
-            <div className="w-full text-center text-gray-400 text-sm">Market data unavailable</div>
           )}
         </div>
       </div>
@@ -772,11 +764,11 @@ function App() {
         }
 
         .animate-scroll {
-          animation: scroll 200s linear infinite;
+          animation: scroll 500s linear infinite;
         }
 
         .animate-scroll-reverse {
-          animation: scroll-reverse 200s linear infinite;
+          animation: scroll-reverse 500s linear infinite;
         }
 
         .animate-scroll:hover,
