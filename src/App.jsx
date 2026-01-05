@@ -84,7 +84,7 @@ const ALL_LLMS = [
   
   // Educational AI
   { id: 'khanmigo', name: 'Khanmigo', url: 'https://www.khanacademy.org/khan-labs', icon: 'https://cdn.kastatic.org/images/favicon.ico', category: 'Education' },
-  { id: 'socratic', name: 'Socratic', url: 'https://socratic.org/', icon: 'https://socratic.org/favicon.ico', category: 'Education' },
+  { id: 'socratic', name: 'Socratic', url: 'https://socratic.org/', icon: 'https://th.bing.com/th/id/ODF.i8c2Bw0gF-1P1hRvbKucwQ?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2', category: 'Education' },
   { id: 'quizlet', name: 'Quizlet AI', url: 'https://quizlet.com/', icon: 'https://quizlet.com/favicon.ico', category: 'Education' },
   { id: 'gradescope', name: 'Gradescope AI', url: 'https://www.gradescope.com/', icon: 'https://www.gradescope.com/favicon.ico', category: 'Education' },
   { id: 'tutorly', name: 'Tutorly.ai', url: 'https://www.tutorly.ai/', icon: 'https://www.tutorly.ai/favicon.ico', category: 'Education' },
@@ -95,9 +95,9 @@ const ALL_LLMS = [
   { id: 'leonardo', name: 'Leonardo.ai', url: 'https://leonardo.ai/', icon: 'https://leonardo.ai/favicon.ico', category: 'Creative' },
   { id: 'playground', name: 'Playground AI', url: 'https://playgroundai.com/', icon: 'https://playgroundai.com/favicon.ico', category: 'Creative' },
   { id: 'stable-diffusion', name: 'Stable Diffusion', url: 'https://stablediffusionweb.com/', icon: 'https://stablediffusionweb.com/favicon.ico', category: 'Creative' },
-  { id: 'ideogram', name: 'Ideogram', url: 'https://ideogram.ai/', icon: 'https://ideogram.ai/assets/image/favicon/favicon.png', category: 'Creative' },
-  { id: 'flux', name: 'Flux', url: 'https://flux.black-forest-labs.com/', icon: 'https://flux.black-forest-labs.com/favicon.ico', category: 'Creative' },
-  { id: 'runway', name: 'Runway', url: 'https://runwayml.com/', icon: 'https://runwayml.com/favicon.ico', category: 'Creative' },
+  { id: 'ideogram', name: 'Ideogram', url: 'https://ideogram.ai/', icon: 'https://th.bing.com/th/id/ODF.sVt4rldtyd5IxlFM7rfnFg?w=32&h=32&qlt=90&pcl=fffffc&o=6&pid=1.2', category: 'Creative' },
+  { id: 'flux', name: 'Flux', url: 'https://flux.black-forest-labs.com/', icon: 'https://th.bing.com/th/id/ODF.sHDv6SoS0-R48rl2JTDNhw?w=32&h=32&qlt=90&pcl=fffffc&o=6&pid=1.2', category: 'Creative' },
+  { id: 'runway', name: 'Runway', url: 'https://app.runwayml.com/signup', icon: 'https://th.bing.com/th/id/ODF.ElkxoMb-OM3VP1fnsexcIA?w=32&h=32&qlt=91&pcl=fffffa&o=6&pid=1.2', category: 'Creative' },
   { id: 'pika', name: 'Pika', url: 'https://pika.art/', icon: 'https://pika.art/favicon.ico', category: 'Creative' },
   { id: 'sora', name: 'Sora', url: 'https://openai.com/sora', icon: 'https://cdn.oaistatic.com/_next/static/media/apple-touch-icon.59f2e898.png', category: 'Creative' },
   
