@@ -18,10 +18,10 @@ const ALL_LLMS = [
   { id: 'consensus', name: 'Consensus', url: 'https://consensus.app/', icon: 'https://th.bing.com/th/id/ODF.Bz8ANAlfvLkBbCmp5ruAFQ?w=32&h=32&qlt=90&pcl=fffffc&o=6&pid=1.2', category: 'Search' },
   { id: 'elicit', name: 'Elicit', url: 'https://elicit.com/', icon: 'https://framerusercontent.com/images/Vjg7ANBZPC8Ulu3iwyAVm5B1UNQ.png', category: 'Search' },
   { id: 'scholarai', name: 'ScholarAI', url: 'https://scholar-ai.net/', icon: 'https://scholar-ai.net/favicon.ico', category: 'Search' },
-  { id: 'tavily', name: 'Tavily', url: 'https://tavily.com/', icon: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/search.svg', category: 'Search' },
-  { id: 'morphic', name: 'Morphic', url: 'https://morphic.sh/', icon: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/openai.svg', category: 'Search' },
-  { id: 'iask', name: 'iAsk.ai', url: 'https://iask.ai/', icon: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/askubuntu.svg', category: 'Search' },
-   
+  { id: 'tavily', name: 'Tavily', url: 'https://tavily.com/', icon: 'https://tavily.com/favicon.ico', category: 'Search' },
+  { id: 'morphic', name: 'Morphic', url: 'https://morphic.sh/', icon: 'https://morphic.sh/favicon.ico', category: 'Search' },
+  { id: 'iask', name: 'iAsk.ai', url: 'https://iask.ai/', icon: 'https://th.bing.com/th/id/ODF.2fOAZ6vZUn5A_maWopELAA?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2' },
+
   // Multi-Model Platforms
   { id: 'poe', name: 'Poe', url: 'https://poe.com/', icon: 'https://th.bing.com/th/id/ODF.qYxPu_oPp_nqOxV638KgEA?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2', category: 'Multi-Model' },
   { id: 'huggingchat', name: 'HuggingChat', url: 'https://huggingface.co/chat/', icon: 'https://huggingface.co/front/assets/huggingface_logo.svg', category: 'Multi-Model' },
@@ -29,9 +29,9 @@ const ALL_LLMS = [
   { id: 'ora', name: 'Ora.ai', url: 'https://ora.ai/', icon: 'https://ora.ai/favicon.ico', category: 'Multi-Model' },
   { id: 'nat', name: 'Nat.dev', url: 'https://nat.dev/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'Multi-Model' },
   { id: 'chathub', name: 'ChatHub', url: 'https://app.chathub.gg/', icon: 'https://chathub.gg/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.d64fdbac.png&w=64&q=75&dpl=dpl_6nGDw82WAnSnjxR3NpEsfKRgV2S9', category: 'Multi-Model' },
-  { id: 'merlin', name: 'Merlin AI', url: 'https://www.getmerlin.in/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'Multi-Model' },
-  { id: 'typing-mind', name: 'TypingMind', url: 'https://www.typingmind.com/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'Multi-Model' },
-  { id: 'chatbox', name: 'Chatbox', url: 'https://chatboxai.app/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'Multi-Model' },
+  { id: 'merlin', name: 'Merlin AI', url: 'https://www.getmerlin.in/', icon: 'https://th.bing.com/th/id/ODF.HXEbInbPX5_OSGW_t0CUvg?w=32&h=32&qlt=90&pcl=fffffc&o=6&pid=1.2', category: 'Multi-Model' },
+  { id: 'typing-mind', name: 'TypingMind', url: 'https://www.typingmind.com/', icon: 'https://www.typingmind.com/favicon.ico', category: 'Multi-Model' },
+  { id: 'chatbox', name: 'Chatbox', url: 'https://chatboxai.app/', icon: 'https://chatboxai.app/favicon.ico', category: 'Multi-Model' },
    
   // Open Source AI
   { id: 'llama', name: 'Meta AI', url: 'https://www.meta.ai/', icon: 'https://th.bing.com/th/id/ODF.tWg2nebkMEte5c1IChpo-A?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2', category: 'Open Source' },
