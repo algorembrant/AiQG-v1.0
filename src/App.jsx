@@ -475,7 +475,8 @@ function App() {
     };
 
     fetchStocks();
-    const interval = setInterval(fetchStocks, 60000);
+    //10 minutes delay
+    const interval = setInterval(fetchStocks, 100000);
     return () => clearInterval(interval);
   }, []);
 
