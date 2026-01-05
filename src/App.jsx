@@ -113,7 +113,12 @@ const ALL_LLMS = [
   { id: 'cyberagent', name: 'CyberAgent LLM', url: 'https://www.cyberagent.co.jp/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'Japanese' },
   { id: 'japanese-stablelm', name: 'Japanese StableLM', url: 'https://ja.stability.ai/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'Japanese' },
   { id: 'pfn-plamo', name: 'PLaMo', url: 'https://www.preferred.jp/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'Japanese' },
-  
+
+  // Philippine AI Platforms
+  { id: 'lexpilipinas', name: 'Lex Pilipinas', url: 'https://lexpilipinas.com/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'Philippines' },
+  { id: 'pilipinasai', name: 'Pilipinas AI', url: 'https://www.epldt.com/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'Philippines' },
+  { id: 'likasgpt', name: 'LikásGPT', url: 'https://www.infinivan.com/infinivan-and-up-diliman-unveil-likasgpt-ai-powered-crm-designed-to-understand-the-filipino-voice/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'Philippines' },
+
   // European AI Platforms
   { id: 'aleph-alpha', name: 'Aleph Alpha', url: 'https://www.aleph-alpha.com/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'European' },
   { id: 'lighton', name: 'LightOn', url: 'https://www.lighton.ai/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'European' },
