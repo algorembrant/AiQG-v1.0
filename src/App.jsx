@@ -478,7 +478,7 @@ function App() {
 
     fetchStocks();
     // Update every 60 seconds for real-time data
-    const interval = setInterval(fetchStocks, 60000);
+    const interval = setInterval(fetchStocks, 100000);
     return () => clearInterval(interval);
   }, []);
 
