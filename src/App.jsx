@@ -338,12 +338,72 @@ const ALL_LLMS = [
   { id: 'chai', name: 'Chai', url: 'https://www.chai-research.com/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'Social' },
 ];
 
+// Mock stock data generator for demonstration
+const generateMockStocks = () => {
+  const symbols = [
+    // Tech Giants
+    'AAPL', 'GOOGL', 'MSFT', 'AMZN', 'META', 'NVDA', 'TSLA', 'NFLX', 'AMD', 'INTC', 
+    'CRM', 'ORCL', 'ADBE', 'CSCO', 'AVGO', 'QCOM', 'TXN', 'IBM', 'INTU', 'NOW',
+    // Finance
+    'JPM', 'BAC', 'WFC', 'GS', 'MS', 'C', 'BLK', 'SCHW', 'AXP', 'V', 'MA', 'PYPL',
+    // Healthcare & Pharma
+    'JNJ', 'UNH', 'PFE', 'ABBV', 'TMO', 'MRK', 'LLY', 'ABT', 'DHR', 'BMY', 'AMGN',
+    // Consumer & Retail
+    'WMT', 'HD', 'PG', 'KO', 'PEP', 'COST', 'MCD', 'NKE', 'SBUX', 'TGT', 'LOW',
+    // Energy
+    'XOM', 'CVX', 'COP', 'SLB', 'EOG', 'PXD', 'MPC', 'PSX', 'VLO', 'OXY',
+    // Industrial
+    'BA', 'HON', 'UPS', 'CAT', 'DE', 'GE', 'MMM', 'LMT', 'RTX', 'FDX',
+    // Media & Entertainment
+    'DIS', 'CMCSA', 'T', 'VZ', 'TMUS', 'NFLX', 'WBD', 'PARA', 'FOXA',
+    // Automotive
+    'TSLA', 'F', 'GM', 'TM', 'HMC', 'RIVN', 'LCID',
+    // Semiconductor
+    'NVDA', 'AMD', 'INTC', 'TSM', 'AVGO', 'QCOM', 'MU', 'AMAT', 'LRCX', 'KLAC',
+    // E-commerce & Payment
+    'AMZN', 'BABA', 'SHOP', 'MELI', 'SQ', 'PYPL', 'EBAY',
+    // Cloud & Software
+    'CRM', 'NOW', 'SNOW', 'DDOG', 'PLTR', 'U', 'NET', 'ZS', 'CRWD', 'OKTA',
+    // Social Media
+    'META', 'SNAP', 'PINS', 'RDDT',
+    // Biotech
+    'GILD', 'VRTX', 'REGN', 'BIIB', 'MRNA', 'BNTX',
+    // Aerospace
+    'BA', 'LMT', 'NOC', 'GD', 'RTX', 'TDG',
+    // Luxury & Apparel
+    'NKE', 'LULU', 'TJX', 'ROST',
+    // REITs
+    'PLD', 'AMT', 'CCI', 'EQIX', 'PSA', 'O',
+    // Crypto Related
+    'COIN', 'MSTR', 'RIOT', 'MARA',
+    // ETFs
+    'SPY', 'QQQ', 'DIA', 'IWM', 'VTI', 'VOO',
+    // International
+    'TSM', 'ASML', 'NVO', 'SAP', 'TM', 'SONY', 'SNY'
+  ];
+  return symbols.map(symbol => {
+    const basePrice = Math.random() * 500 + 100;
+    const change = (Math.random() - 0.5) * 10;
+    const percentChange = (change / basePrice) * 100;
+    
+    return {
+      symbol,
+      price: basePrice.toFixed(2),
+      change: change >= 0 ? `+${change.toFixed(2)}` : change.toFixed(2),
+      percent: `${percentChange >= 0 ? '+' : ''}${percentChange.toFixed(2)}%`,
+      isUp: change >= 0
+    };
+  });
+};
+
 function App() {
   const [activeLLMs, setActiveLLMs] = useState([]);
   const [draggedItem, setDraggedItem] = useState(null);
   const [showSidebar, setShowSidebar] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [stocks, setStocks] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const categories = ['All', ...new Set(ALL_LLMS.map(llm => llm.category))].sort();
 
@@ -352,6 +412,76 @@ function App() {
     const matchesSearch = llm.name.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
+
+  useEffect(() => {
+    const fetchStocks = async () => {
+      try {
+        setLoading(true);
+        
+        // Using Finnhub API for real-time stock data
+        const API_KEY = 'ct9pr41r01qnhfe93jagct9pr41r01qnhfe93jb0'; // Free demo key
+        const symbols = [
+          'AAPL', 'GOOGL', 'MSFT', 'AMZN', 'META', 'NVDA', 'TSLA', 'NFLX', 'AMD', 'INTC',
+          'JPM', 'BAC', 'V', 'MA', 'WMT', 'HD', 'DIS', 'BA', 'KO', 'PEP',
+          'COST', 'NKE', 'MCD', 'SBUX', 'XOM', 'CVX', 'JNJ', 'UNH', 'PFE', 'ABBV'
+        ];
+        
+        const stockData = [];
+        
+        // Fetch in batches to avoid rate limits
+        for (let i = 0; i < symbols.length; i++) {
+          try {
+            const symbol = symbols[i];
+            const response = await fetch(
+              `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${API_KEY}`
+            );
+            const data = await response.json();
+            
+            if (data.c && data.c > 0) {
+              const currentPrice = data.c;
+              const change = data.d || 0;
+              const percentChange = data.dp || 0;
+              
+              stockData.push({
+                symbol,
+                price: currentPrice.toFixed(2),
+                change: change >= 0 ? `+${change.toFixed(2)}` : change.toFixed(2),
+                percent: `${percentChange >= 0 ? '+' : ''}${percentChange.toFixed(2)}%`,
+                isUp: change >= 0
+              });
+            }
+            
+            // Small delay between requests to avoid rate limiting
+            if (i < symbols.length - 1) {
+              await new Promise(resolve => setTimeout(resolve, 100));
+            }
+          } catch (err) {
+            console.error(`Error fetching ${symbols[i]}:`, err);
+          }
+        }
+        
+        // If we got real data, use it; otherwise fall back to mock
+        if (stockData.length > 0) {
+          console.log(`Fetched ${stockData.length} real-time stocks`);
+          setStocks(stockData);
+        } else {
+          console.log('API failed, using mock data');
+          setStocks(generateMockStocks());
+        }
+        
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching stock data:', error);
+        setStocks(generateMockStocks());
+        setLoading(false);
+      }
+    };
+
+    fetchStocks();
+    // Update every 60 seconds for real-time data
+    const interval = setInterval(fetchStocks, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleDragStart = (e, llm) => {
     setDraggedItem(llm);
@@ -383,147 +513,278 @@ function App() {
   };
 
   return (
-    <div className="flex h-screen bg-white text-gray-900">
-      <div className={`${showSidebar ? 'w-80' : 'w-0'} transition-all duration-300 border-r border-gray-200 flex flex-col overflow-hidden`}>
-        <div className="p-4 border-b border-gray-200">
-          <h1 className="text-xl font-semibold mb-2">AiQuasarous Global</h1>
-          <p className="text-sm text-gray-600">Drag-drop-open your favorite Model</p>
-          <p className="text-xs text-gray-500 mt-1">{ALL_LLMS.length} AI platforms available worldwide</p>
-        </div>
-
-        <div className="px-4 py-3 border-b border-gray-200">
-          <div className="relative mb-3">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search platforms..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
-            />
-          </div>
-          <div className="flex gap-2 flex-wrap">
-            {categories.map(cat => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                  selectedCategory === cat ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex-1 overflow-y-auto p-4">
-          <div className="space-y-2">
-            {filteredLLMs.map(llm => (
-              <div
-                key={llm.id}
-                draggable
-                onDragStart={(e) => handleDragStart(e, llm)}
-                className="p-3 border border-gray-200 rounded-lg cursor-move hover:border-gray-400 hover:shadow-sm transition-all bg-white"
-              >
-                <div className="flex items-center gap-3">
-                  <img 
-                    src={llm.icon} 
-                    alt={llm.name} 
-                    className="w-8 h-8 rounded-lg flex-shrink-0" 
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                    }} 
-                  />
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-medium text-sm truncate">{llm.name}</h3>
-                    <span className="text-xs text-gray-500">{llm.category}</span>
-                  </div>
-                  <Grip className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                </div>
+    <div className="flex flex-col h-screen bg-white text-gray-900">
+      {/* Top LLM Banner */}
+      <div className="h-16 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 overflow-hidden relative border-b border-gray-700">
+        <div className="absolute inset-0 flex items-center">
+          <div className="flex animate-scroll whitespace-nowrap">
+            {[...ALL_LLMS, ...ALL_LLMS, ...ALL_LLMS].map((llm, index) => (
+              <div key={`${llm.id}-${index}`} className="inline-flex items-center gap-3 px-6 py-2 mx-2 bg-white/10 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all cursor-pointer">
+                <img 
+                  src={llm.icon} 
+                  alt={llm.name} 
+                  className="w-6 h-6 rounded" 
+                  onError={(e) => e.target.style.display = 'none'} 
+                />
+                <span className="font-medium text-white text-sm">{llm.name}</span>
+                <span className="text-xs text-gray-300 bg-white/10 px-2 py-0.5 rounded">{llm.category}</span>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col">
-        <div className="h-14 border-b border-gray-200 flex items-center justify-between px-4">
-          <button onClick={() => setShowSidebar(!showSidebar)} className="p-2 hover:bg-gray-100 rounded-lg">
-            <Layout className="w-5 h-5" />
-          </button>
-          <div className="text-sm text-gray-600">
-            {activeLLMs.length} {activeLLMs.length === 1 ? 'model' : 'models'}
+      <div className="flex flex-1 overflow-hidden">
+        <div className={`${showSidebar ? 'w-80' : 'w-0'} transition-all duration-300 border-r border-gray-200 flex flex-col overflow-hidden`}>
+          <div className="p-4 border-b border-gray-200">
+            <div className="flex items-center justify-between mb-2">
+              <h1 className="text-xl font-bold golden-glow whitespace-nowrap">
+                AiQuasarous Global
+              </h1>
+              <a 
+                href="https://github.com/algorembrant/AiQG-v1.0" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 px-3 py-1.5 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors text-xs font-medium"
+                title="Support this project on GitHub"
+              >
+                <Github className="w-4 h-4" />
+                Star
+              </a>
+            </div>
+            <p className="text-sm text-gray-600">Drag-drop-open your favorite Model</p>
+            <p className="text-xs text-gray-500 mt-1">{ALL_LLMS.length} AI platforms available worldwide</p>
           </div>
-          <button onClick={() => setActiveLLMs([])} className="px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-100 rounded-lg">
-            Clear All
-          </button>
+
+          <div className="px-4 py-3 border-b border-gray-200">
+            <div className="relative mb-3">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search platforms..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"
+              />
+            </div>
+            <div className="flex gap-2 flex-wrap">
+              {categories.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                    selectedCategory === cat ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex-1 overflow-y-auto p-4">
+            <div className="space-y-2">
+              {filteredLLMs.map(llm => (
+                <div
+                  key={llm.id}
+                  draggable
+                  onDragStart={(e) => handleDragStart(e, llm)}
+                  className="p-3 border border-gray-200 rounded-lg cursor-move hover:border-gray-400 hover:shadow-sm transition-all bg-white"
+                >
+                  <div className="flex items-center gap-3">
+                    <img 
+                      src={llm.icon} 
+                      alt={llm.name} 
+                      className="w-8 h-8 rounded-lg flex-shrink-0" 
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                      }} 
+                    />
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-medium text-sm truncate">{llm.name}</h3>
+                      <span className="text-xs text-gray-500">{llm.category}</span>
+                    </div>
+                    <Grip className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <div onDragOver={handleDragOver} onDrop={handleDrop} className="flex-1 overflow-hidden">
-          {activeLLMs.length === 0 ? (
-            <div className="h-full flex items-center justify-center text-gray-400">
-              <div className="text-center">
-                <Grid className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                <p className="text-lg font-medium">Drop AI models here</p>
-                <p className="text-sm mt-2">Drag from sidebar to compare</p>
-              </div>
+        <div className="flex-1 flex flex-col">
+          <div className="h-14 border-b border-gray-200 flex items-center justify-between px-4">
+            <button onClick={() => setShowSidebar(!showSidebar)} className="p-2 hover:bg-gray-100 rounded-lg">
+              <Layout className="w-5 h-5" />
+            </button>
+            <div className="text-sm text-gray-600">
+              {activeLLMs.length} {activeLLMs.length === 1 ? 'model' : 'models'}
             </div>
-          ) : (
-            <div className={`h-full grid gap-2 p-2 ${
-              activeLLMs.length === 1 ? 'grid-cols-1' :
-              activeLLMs.length === 2 ? 'grid-cols-2' :
-              activeLLMs.length === 3 ? 'grid-cols-3' :
-              activeLLMs.length === 4 ? 'grid-cols-2 grid-rows-2' : 'grid-cols-3'
-            }`}>
-              {activeLLMs.map((llm) => (
-                <div key={llm.id} className="relative border border-gray-200 rounded-lg overflow-hidden bg-white flex flex-col">
-                  <div className="h-12 flex items-center justify-between px-4 border-b border-gray-200 bg-gray-50">
-                    <div className="flex items-center gap-2">
-                      <img 
-                        src={llm.icon} 
-                        alt={llm.name} 
-                        className="w-5 h-5 rounded" 
-                        onError={(e) => e.target.style.display = 'none'} 
-                      />
-                      <span className="font-medium text-sm">{llm.name}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <button onClick={() => openInNewWindow(llm)} className="p-1.5 hover:bg-gray-200 rounded" title="Open in new window">
-                        <ExternalLink className="w-4 h-4" />
-                      </button>
-                      <button onClick={() => removeLLM(llm.id)} className="p-1.5 hover:bg-gray-200 rounded">
-                        <X className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
+            <button onClick={() => setActiveLLMs([])} className="px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-100 rounded-lg">
+              Clear All
+            </button>
+          </div>
 
-                  <div className="flex-1 relative bg-gray-50">
-                    <div className="absolute inset-0 flex items-center justify-center p-8">
-                      <div className="text-center space-y-4">
-                        <AlertCircle className="w-12 h-12 mx-auto text-gray-400" />
-                        <div>
-                          <h3 className="font-medium text-gray-900 mb-2">Direct Embedding Not Available</h3>
-                          <p className="text-sm text-gray-600 mb-4">Cannot embed due to security restrictions</p>
-                          <div className="space-y-2">
-                            <button onClick={() => openInNewWindow(llm)} className="w-full px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 flex items-center justify-center gap-2">
-                              <ExternalLink className="w-4 h-4" />
-                              Open in New Window
-                            </button>
-                            <a href={llm.url} target="_blank" rel="noopener noreferrer" className="block w-full px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 text-center text-sm">
-                              Open in New Tab
-                            </a>
+          <div onDragOver={handleDragOver} onDrop={handleDrop} className="flex-1 overflow-hidden">
+            {activeLLMs.length === 0 ? (
+              <div className="h-full flex items-center justify-center text-gray-400">
+                <div className="text-center">
+                  <Grid className="w-16 h-16 mx-auto mb-4 opacity-50" />
+                  <p className="text-lg font-medium">Drop AI models here</p>
+                  <p className="text-sm mt-2">Drag from sidebar to compare</p>
+                </div>
+              </div>
+            ) : (
+              <div className={`h-full grid gap-2 p-2 ${
+                activeLLMs.length === 1 ? 'grid-cols-1' :
+                activeLLMs.length === 2 ? 'grid-cols-2' :
+                activeLLMs.length === 3 ? 'grid-cols-3' :
+                activeLLMs.length === 4 ? 'grid-cols-2 grid-rows-2' : 'grid-cols-3'
+              }`}>
+                {activeLLMs.map((llm) => (
+                  <div key={llm.id} className="relative border border-gray-200 rounded-lg overflow-hidden bg-white flex flex-col">
+                    <div className="h-12 flex items-center justify-between px-4 border-b border-gray-200 bg-gray-50">
+                      <div className="flex items-center gap-2">
+                        <img 
+                          src={llm.icon} 
+                          alt={llm.name} 
+                          className="w-5 h-5 rounded" 
+                          onError={(e) => e.target.style.display = 'none'} 
+                        />
+                        <span className="font-medium text-sm">{llm.name}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <button onClick={() => openInNewWindow(llm)} className="p-1.5 hover:bg-gray-200 rounded" title="Open in new window">
+                          <ExternalLink className="w-4 h-4" />
+                        </button>
+                        <button onClick={() => removeLLM(llm.id)} className="p-1.5 hover:bg-gray-200 rounded">
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="flex-1 relative bg-gray-50">
+                      <div className="absolute inset-0 flex items-center justify-center p-8">
+                        <div className="text-center space-y-4">
+                          <AlertCircle className="w-12 h-12 mx-auto text-gray-400" />
+                          <div>
+                            <h3 className="font-medium text-gray-900 mb-2">Direct Embedding Not Available</h3>
+                            <p className="text-sm text-gray-600 mb-4">Cannot embed due to security restrictions</p>
+                            <div className="space-y-2">
+                              <button onClick={() => openInNewWindow(llm)} className="w-full px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 flex items-center justify-center gap-2">
+                                <ExternalLink className="w-4 h-4" />
+                                Open in New Window
+                              </button>
+                              <a href={llm.url} target="_blank" rel="noopener noreferrer" className="block w-full px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 text-center text-sm">
+                                Open in New Tab
+                              </a>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Stock Ticker */}
+      <div className="h-10 bg-gray-900 overflow-hidden relative border-t border-gray-700">
+        <div className="absolute inset-0 flex items-center">
+          {loading ? (
+            <div className="w-full text-center text-gray-400 text-sm">Loading market data...</div>
+          ) : stocks.length > 0 ? (
+            <div className="flex animate-scroll-reverse whitespace-nowrap">
+              {[...stocks, ...stocks, ...stocks, ...stocks, ...stocks].map((stock, index) => (
+                <div key={`${stock.symbol}-${index}`} className="inline-flex items-center gap-2 px-4 py-1 mx-2 text-sm">
+                  <span className="font-semibold text-white">{stock.symbol}</span>
+                  <span className="text-gray-300">${stock.price}</span>
+                  <span className={`flex items-center gap-1 ${stock.isUp ? 'text-green-400' : 'text-red-400'}`}>
+                    {stock.isUp ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
+                    {stock.change} ({stock.percent})
+                  </span>
                 </div>
               ))}
             </div>
+          ) : (
+            <div className="w-full text-center text-gray-400 text-sm">Market data unavailable</div>
           )}
         </div>
       </div>
+
+      <style>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-33.33%);
+          }
+        }
+
+        @keyframes scroll-reverse {
+          0% {
+            transform: translateX(-33.33%);
+          }
+          100% {
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes sparkle {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        @keyframes glow-pulse {
+          0%, 100% { 
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.6),
+                         0 0 10px rgba(255, 215, 0, 0.4);
+          }
+          50% { 
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.8),
+                         0 0 15px rgba(255, 215, 0, 0.5);
+          }
+        }
+
+        @keyframes gradient-shift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+
+        .golden-glow {
+          background: linear-gradient(135deg, #ffd700 0%, #ffed4e 25%, #ffa500 50%, #ffed4e 75%, #ffd700 100%);
+          background-size: 200% 200%;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          animation: glow-pulse 2s ease-in-out infinite, gradient-shift 3s ease infinite;
+          position: relative;
+        }
+
+        .sparkle-icon {
+          color: #ffd700;
+          animation: sparkle 2s ease-in-out infinite;
+          filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.8));
+        }
+
+        .animate-scroll {
+          animation: scroll 40s linear infinite;
+        }
+
+        .animate-scroll-reverse {
+          animation: scroll-reverse 45s linear infinite;
+        }
+
+        .animate-scroll:hover,
+        .animate-scroll-reverse:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </div>
   );
 }
