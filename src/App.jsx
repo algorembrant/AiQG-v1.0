@@ -770,7 +770,7 @@ function App() {
               </div>
               <p className="text-sm text-gray-600">Drag-drop-open your favorite Model</p>
               <p className="text-xs text-gray-500 mt-1">
-                {filteredLLMs.length} models total
+                {filteredLLMs.length} AI models available
                 {filteredLLMs.length > ITEMS_PER_PAGE && ` (Page ${page + 1})`}
               </p>
             </div>
