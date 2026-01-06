@@ -1,7 +1,7 @@
 Drag-drop-open your favorite Model <br>
-***264 AI platforms** available worldwide in one place!*<br>
+***284 AI platforms** available worldwide in one place!*<br>
 >**NO SIGN-IN, NO ADS, NO SUBSCRIPTION, NO IP-ADDRESS LEAKAGE, NO HASSLE,** and access **ALL** AI platforms for **FREE!** with just a one-click button away <br>
->Drag-drop-open your favorite Model in **ONE** place! across 35 categories!
+>Drag-drop-open your favorite Model in **ONE** place! across 37 categories!
 
 
 [<img width="1346" height="334" alt="image" src="https://github.com/user-attachments/assets/a0322d87-e728-4869-aac4-87f73b843440" />](https://aiqg.vercel.app/)
