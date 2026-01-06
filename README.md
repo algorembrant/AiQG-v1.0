@@ -5,7 +5,7 @@
 
 > *“I want to learn and explore AI models from around the world, but I have no idea where to start.”*
 
-You are not alone — and you are in the right place.<br><br>
+You are not alone — and you are in the right place!<br><br>
 
 
 
