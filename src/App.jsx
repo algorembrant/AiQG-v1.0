@@ -368,6 +368,8 @@ const ALL_LLMS = [
   { id: 'Lean', name: 'Lean', url: 'https://github.com/QuantConnect/Lean/', icon: 'https://avatars.githubusercontent.com/u/3912814?s=48&v=4', category: 'Trading' },
   { id: 'Nautilus', name: 'Nautilus', url: 'https://github.com/nautechsystems/nautilus_trader', icon: 'https://avatars.githubusercontent.com/u/33360632?s=48&v=4', category: 'Trading' },
   { id: 'Lacuna', name: 'Lacuna', url: 'https://humanplane.com/lacuna', icon: 'https://avatars.githubusercontent.com/u/240769383?s=48&v=4', category: 'Trading' },
+  { id: 'HKUDS AI-Trader', name: 'HKUDS AI-Trader', url: 'https://ai4trade.ai/index.html', icon: 'https://avatars.githubusercontent.com/u/118165258?s=48&v=4', category: 'Trading' },
+
 
 ];
 
