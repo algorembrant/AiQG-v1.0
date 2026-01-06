@@ -198,3 +198,16 @@ Llama Chat, Yi Chat
 
 **Trading Open-source**<br>
 Lean, Nautilus, Lacuna, HKUDS AI-Trader
+
+## Citation
+Here's the citation if you find these helpful!
+
+```bibtex
+@misc{AiQG,
+  author = {Albeos, Rembrant},
+  title = {{AiQuasarous Global}},
+  year = {2026},
+  url = {https://github.com/algorembrant/AiQG},
+  note = {GitHub repository}
+}
+```
