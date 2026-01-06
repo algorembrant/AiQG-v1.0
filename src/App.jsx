@@ -381,6 +381,7 @@ const CUTE_IMAGES = [
   '/cute characters/cute pixel char-4.png',
   '/cute characters/cute pixel char-5.png',
   '/cute characters/cute pixel char-6.png',
+  
 ];
 
 const getRandomImage = () => {
@@ -490,6 +491,7 @@ function App() {
 
   // --- STYLING VARIABLES ---
   const isButtonDisabled = activeLLMs.length === 0;
+  
   
   const goldButtonStyle = `
     relative overflow-hidden flex items-center gap-1.5 px-3 py-1.5 text-sm font-bold rounded-lg transition-all transform 
