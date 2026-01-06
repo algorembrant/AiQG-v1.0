@@ -5,7 +5,7 @@ Drag-drop-open your favorite Model <br>
 >Drag-drop-open your favorite Model in **ONE** place! across 35 categories!
 
 
-[![alt text](image-4.png)](https://aiqg.vercel.app/)
+[<img width="1346" height="334" alt="image" src="https://github.com/user-attachments/assets/a0322d87-e728-4869-aac4-87f73b843440" />](https://aiqg.vercel.app/)
 
 
 
