@@ -120,3 +120,20 @@ Scenario, Promethean AI, Inworld AI, Charisma.ai
 **Social & Companion AI**<br>
 Replika, Kindroid, Nomi AI, Chai
 
+**Search & Productivity**<br>
+Fini AI, ZenoChat, Chatsonic
+
+**HR & Enterprise**<br>
+Amber by inFeedo, Paradox Olivia, Mya Systems, Eightfold AI, Ideal
+
+**Multi-Model & Experimental**<br>
+Botpress, Knock AI
+
+**Specialized Tools**<br>
+Lyro, NiCE Chatbot
+
+**Open Source & Regional**<br>
+Llama Chat, Yi Chat
+
+**Trading Open-source**<br>
+Lean, Nautilus, Lacuna, HKUDS AI-Trader
