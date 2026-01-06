@@ -78,13 +78,12 @@ const ALL_LLMS = [
   { id: 'AIBOT', name: 'AIBOT', url: 'https://www.aibotcn.com/', icon: 'https://th.bing.com/th/id/ODF.bRKPsqfqY7dynQ9Rrpbraw?w=32&h=32&qlt=91&pcl=fffffa&o=6&pid=1.2', category: 'Chinese' },
   
   // Indian AI Platforms
-  { id: 'bharatgpt', name: 'BharatGPT', url: 'https://bharatgpt.ai/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'Indian' },
-  { id: 'krutrim', name: 'Krutrim', url: 'https://www.olakrutrim.com/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'Indian' },
-  { id: 'hanooman', name: 'Hanooman AI', url: 'https://www.seetalabs.com/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'Indian' },
-  { id: 'ai4bharat', name: 'AI4Bharat', url: 'https://ai4bharat.iitm.ac.in/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'Indian' },
-  { id: 'sarvam', name: 'Sarvam AI', url: 'https://www.sarvam.ai/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'Indian' },
-  { id: 'jugalbandi', name: 'Jugalbandi', url: 'https://www.jugalbandi.ai/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'Indian' },
-  { id: 'airavata', name: 'Airavata', url: 'https://ai4bharat.iitm.ac.in/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'Indian' },
+  { id: 'bharatgpt', name: 'BharatGPT', url: 'https://bharatgpt.ai/', icon: 'https://th.bing.com/th/id/ODF.V3TAgJQBL9pmhK-fXnHgVg?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2', category: 'Indian' },
+  { id: 'krutrim', name: 'Krutrim', url: 'https://www.olakrutrim.com/', icon: 'https://images.0xw.app/images/Krutrim%20AI.png', category: 'Indian' },
+  { id: 'hanooman', name: 'Hanooman AI', url: 'https://www.seetalabs.com/', icon: 'https://media.licdn.com/dms/image/v2/D4E0BAQE9H--42Yctxg/company-logo_200_200/B4EZT6mp4BHUAM-/0/1739371225096?e=2147483647&v=beta&t=i1l2ggWgWXJurdBbFo0uYmTUo_PlkJMGMUck1f9CSUw', category: 'Indian' },
+  { id: 'ai4bharat', name: 'AI4Bharat', url: 'https://ai4bharat.iitm.ac.in/', icon: 'https://th.bing.com/th/id/ODF.uybEA3Gm_HNh7VQiFNuSXw?w=32&h=32&qlt=90&pcl=fffffc&o=6&pid=1.2', category: 'Indian' },
+  { id: 'sarvam', name: 'Sarvam AI', url: 'https://www.sarvam.ai/', icon: 'https://th.bing.com/th/id/ODF.s9n7Pi1dZd-PAFEiuGSHvg?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2', category: 'Indian' },
+  { id: 'airavata', name: 'Airavata', url: 'https://ai4bharat.iitm.ac.in/', icon: 'https://ai4bharat.iitm.ac.in/assets/logos/ai4bclogo.png', category: 'Indian' },
   
   // Middle East & Arabic AI
   { id: 'jais', name: 'JAIS', url: 'https://inceptioniai.ai/jais/', icon: 'https://th.bing.com/th/id/ODF.g6lSy1ZwCzuapMaGl9OKeA?w=32&h=32&qlt=90&pcl=fffffc&o=6&pid=1.2', category: 'Arabic' },
