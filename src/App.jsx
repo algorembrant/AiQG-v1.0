@@ -115,8 +115,7 @@ const ALL_LLMS = [
   { id: 'pfn-plamo', name: 'PLaMo', url: 'https://www.preferred.jp/', icon: 'https://th.bing.com/th/id/ODF.A1xWguSIDjJ_vAwsTzqgpg?w=32&h=32&qlt=90&pcl=fffffc&o=6&pid=1.2', category: 'Japanese' },
 
   // Philippine AI Platforms
-  { id: 'lexpilipinas', name: 'Lex Pilipinas', url: 'https://lexpilipinas.com/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'Philippines' },
-  { id: 'pilipinasai', name: 'Pilipinas AI', url: 'https://www.epldt.com/', icon: 'https://pngfre.com/wp-content/uploads/question-mark-42-1024x1024.png', category: 'Philippines' },
+  { id: 'lexpilipinas', name: 'Lex Pilipinas', url: 'https://lexpilipinas.com/', icon: 'https://th.bing.com/th/id/OIP.KbM1YMwDPh7LDFAQ8rjVzgHaBH?w=361&h=58&c=7&r=0&o=7&pid=1.7&rm=3', category: 'Philippines' },
   { id: 'likasgpt', name: 'LikásGPT', url: 'https://www.infinivan.com/infinivan-and-up-diliman-unveil-likasgpt-ai-powered-crm-designed-to-understand-the-filipino-voice/', icon: 'https://th.bing.com/th/id/ODF.E_pcQ0vuT9D7Fl3dexKp7g?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2', category: 'Philippines' },
 
   // European AI Platforms
@@ -173,7 +172,7 @@ const ALL_LLMS = [
   { id: 'quizlet', name: 'Quizlet AI', url: 'https://quizlet.com/', icon: 'https://quizlet.com/favicon.ico', category: 'Education' },
   { id: 'gradescope', name: 'Gradescope AI', url: 'https://www.gradescope.com/', icon: 'https://www.gradescope.com/favicon.ico', category: 'Education' },
   { id: 'tutorly', name: 'Tutorly.ai', url: 'https://www.tutorly.ai/', icon: 'https://www.tutorly.ai/favicon.ico', category: 'Education' },
-  { id: 'duolingo', name: 'Duolingo Max', url: 'https://www.duolingo.com/max', icon: 'https://www.duolingo.com/favicon.ico', category: 'Education' },
+  { id: 'duolingo', name: 'Duolingo Max', url: 'https://www.duolingo.com/max', icon: 'https://th.bing.com/th/id/ODF.KIf7QtBF_VhupdicFil1yA?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2', category: 'Education' },
   { id: 'mathway', name: 'Mathway', url: 'https://www.mathway.com/', icon: 'https://th.bing.com/th/id/ODF.5EfwnocTH_HEcNsELrJB7g?w=32&h=32&qlt=90&pcl=fffffc&o=6&pid=1.2', category: 'Education' },
   { id: 'studymonkey', name: 'StudyMonkey', url: 'https://studymonkey.ai/', icon: 'https://th.bing.com/th/id/ODF.x-GuAKhlHBb_KxR6q-nPMw?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2', category: 'Education' },
   { id: 'tutoreva', name: 'TutorEva', url: 'https://www.tutoreva.com/', icon: 'https://th.bing.com/th/id/ODF.YqevZ49OVIsiY5o0rYzbug?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2', category: 'Education' },
