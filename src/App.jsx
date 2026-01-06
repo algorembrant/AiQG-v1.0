@@ -377,8 +377,6 @@ const ALL_LLMS = [
 ];
 
 // --- NEW: CUTE CHARACTER IMAGES CONFIGURATION ---
-// Assuming a naming convention based on your request. 
-// If you have specific names, add them here.
 const CUTE_IMAGES = [
   '/cute characters/cute pixel char-1.png',
   '/cute characters/cute pixel char-2.png', 
