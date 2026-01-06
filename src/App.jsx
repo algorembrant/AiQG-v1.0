@@ -389,6 +389,7 @@ const CUTE_IMAGES = [
   '/cute characters/cute pixel char-7.png',
   '/cute characters/cute pixel char-8.png',
   '/cute characters/cute pixel char-9.png',
+  '/cute characters/cute pixel char-10.png',
   
 ];
 
