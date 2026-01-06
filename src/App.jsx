@@ -212,6 +212,7 @@ const ALL_LLMS = [
   { id: 'suno', name: 'Suno AI', url: 'https://www.suno.ai/', icon: 'https://th.bing.com/th/id/ODF.ILgyNiCPIfidhMheFPj0OQ?w=32&h=32&qlt=91&pcl=fffffa&o=6&pid=1.2', category: 'Voice' },
   { id: 'udio', name: 'Udio', url: 'https://www.udio.com/', icon: 'https://th.bing.com/th/id/ODF.LnAGZU9P3bCbY6fH-vWmng?w=32&h=32&qlt=90&pcl=fffffc&o=6&pid=1.2', category: 'Voice' },
   { id: 'audiobox', name: 'AudioBox', url: 'https://audiobox.metademolab.com/', icon: 'https://th.bing.com/th/id/ODF.MWMIJ-2xIWQ7doC_8gpNUg?w=32&h=32&qlt=90&pcl=fffffc&o=6&pid=1.2', category: 'Voice' },
+  { id: 'whisperflow', name: 'Whisper Flow', url: 'https://whisperflow.app/', icon: 'https://th.bing.com/th/id/ODF.xKsDijZys0cxJ8C-N5FUzg?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2', category: 'Voice' },
   
   // Experimental & Research
   { id: 'pi', name: 'Pi (Inflection)', url: 'https://pi.ai/', icon: 'https://th.bing.com/th/id/ODF.iBZdyeyAhzJZ3-7hSw_NgQ?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2', category: 'Experimental' },
