@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
-import { X, ExternalLink, Grip, AlertCircle, Layout, Grid, Search, Github, TrendingUp, TrendingDown, Layers, ZoomIn, Maximize2, Monitor, AppWindow, ChevronRight, ChevronLeft } from 'lucide-react';
+import { X, ExternalLink, Grip, AlertCircle, Layout, Grid, Search, Github, TrendingUp, TrendingDown, Layers, ZoomIn, Maximize2, Monitor, AppWindow, ChevronRight, ChevronLeft, Lock } from 'lucide-react';
 
 const ALL_LLMS = [
   // Major AI Assistants
@@ -370,6 +370,7 @@ const ALL_LLMS = [
   { id: 'Lacuna', name: 'Lacuna', url: 'https://humanplane.com/lacuna', icon: 'https://avatars.githubusercontent.com/u/240769383?s=48&v=4', category: 'Trading' },
 
 ];
+
 // Mock stock data generator
 const generateMockStocks = () => {
   const symbols = [
@@ -440,7 +441,7 @@ const SidebarItem = React.memo(({ llm, onDragStart }) => (
 function App() {
   const [activeLLMs, setActiveLLMs] = useState([]);
   const draggedItemRef = useRef(null); 
-  const sidebarScrollRef = useRef(null); // Ref for auto-scrolling sidebar
+  const sidebarScrollRef = useRef(null);
 
   const [showSidebar, setShowSidebar] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -448,17 +449,33 @@ function App() {
   const [stocks, setStocks] = useState(() => generateMockStocks());
   const [showIntro, setShowIntro] = useState(true);
   
-  // ADJUSTMENT: Hide themes by default
   const [showThemes, setShowThemes] = useState(false);
-  
   const [zoomLevel, setZoomLevel] = useState(100);
   
-  // ADJUSTMENT: Page state for the "Show 50 / Unshow previous" logic
   const [page, setPage] = useState(0);
   const ITEMS_PER_PAGE = 50;
 
-  // ADJUSTMENT: Mobile detection state
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 1600);
+  // Mobile detection state
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1000);
+
+  // STYLING VARIABLES FOR GOLD BUTTONS
+  const isButtonDisabled = activeLLMs.length === 0; // Note: isMobile logic handled by rendering condition
+  
+  const goldButtonStyle = `
+    relative overflow-hidden flex items-center gap-1.5 px-3 py-1.5 text-sm font-bold rounded-lg transition-all transform 
+    text-gray-900 bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-500 border border-yellow-200 
+    hover:scale-105 active:scale-95 cursor-pointer
+  `;
+  
+  const disabledButtonStyle = `
+    flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg transition-colors
+    text-gray-400 bg-gray-50 cursor-not-allowed opacity-60
+  `;
+
+  const luxuriousShadow = {
+    textShadow: '0px 1px 0px rgba(255,255,255,0.4)',
+    boxShadow: '0 4px 6px -1px rgba(212, 175, 55, 0.4), 0 2px 4px -1px rgba(212, 175, 55, 0.2), inset 0 1px 0 rgba(255,255,255,0.5)'
+  };
 
   const categories = useMemo(() => {
     return ['All', ...new Set(ALL_LLMS.map(llm => llm.category))].sort();
@@ -471,7 +488,6 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Window resize listener for mobile state
   useEffect(() => {
     const handleResize = () => {
         setIsMobile(window.innerWidth < 1000);
@@ -480,19 +496,16 @@ function App() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Reset page to 0 if filter changes
   useEffect(() => {
     setPage(0);
   }, [selectedCategory, searchQuery]);
 
-  // ADJUSTMENT: Scroll sidebar to top when page changes
   useEffect(() => {
     if (sidebarScrollRef.current) {
         sidebarScrollRef.current.scrollTop = 0;
     }
   }, [page]);
 
-  // 1. Get ALL matches (The Total Count)
   const filteredLLMs = useMemo(() => {
     return ALL_LLMS.filter(llm => {
       const matchesCategory = selectedCategory === 'All' || llm.category === selectedCategory;
@@ -501,14 +514,11 @@ function App() {
     });
   }, [selectedCategory, searchQuery]);
 
-  // --- OPTIMIZATION: Pagination Slice ---
-  // Shows items [0-50], then [50-100], etc.
   const visibleLLMs = useMemo(() => {
     const startIndex = page * ITEMS_PER_PAGE;
     const endIndex = startIndex + ITEMS_PER_PAGE;
     return filteredLLMs.slice(startIndex, endIndex);
   }, [filteredLLMs, page]);
-  // --------------------------------------
 
   useEffect(() => {
     const fetchStocks = async () => {
@@ -723,7 +733,6 @@ function App() {
                 </a>
               </div>
               <p className="text-sm text-gray-600">Drag-drop-open your favorite Model</p>
-              {/* Show total count, but mention pagination */}
               <p className="text-xs text-gray-500 mt-1">
                 {filteredLLMs.length} models total
                 {filteredLLMs.length > ITEMS_PER_PAGE && ` (Page ${page + 1})`}
@@ -781,7 +790,6 @@ function App() {
                   />
                 ))}
                 
-                {/* PAGINATION CONTROLS */}
                 {(filteredLLMs.length > ITEMS_PER_PAGE) && (
                   <div className="flex items-center justify-between pt-4 mt-2 border-t border-gray-100">
                     <button 
@@ -851,17 +859,25 @@ function App() {
               </div>
 
               <div className="flex items-center gap-2">
-                {/* ADJUSTMENT: Only show these advanced buttons if NOT mobile */}
-                {!isMobile && (
+                {isMobile ? (
+                  // MOBILE VIEW: Show Hidden Feature Unlock Button
+                  <button 
+                    className={goldButtonStyle}
+                    style={luxuriousShadow}
+                    onClick={() => alert("These advanced multi-window features require a Desktop PC environment for the best experience.")}
+                  >
+                    <Lock className="w-3 h-3" />
+                    <span className="hidden sm:inline">Unlock Hidden Features on PC</span>
+                    <span className="sm:hidden text-xs">Unlock on PC</span>
+                  </button>
+                ) : (
+                  // DESKTOP VIEW: Show Open All Buttons with Luxury Styling
                   <>
                     <button 
                       onClick={openAllTabs} 
-                      disabled={activeLLMs.length === 0}
-                      className={`flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg transition-all btn-luxury ${
-                        activeLLMs.length === 0 
-                        ? 'opacity-50 cursor-not-allowed grayscale' 
-                        : 'hover:scale-105'
-                      }`}
+                      disabled={isButtonDisabled}
+                      className={isButtonDisabled ? disabledButtonStyle : goldButtonStyle}
+                      style={isButtonDisabled ? {} : luxuriousShadow}
                     >
                       <Monitor className="w-4 h-4" />
                       <span className="hidden sm:inline">Openall Tabs</span>
@@ -869,12 +885,9 @@ function App() {
 
                     <button 
                       onClick={openAllPopups} 
-                      disabled={activeLLMs.length === 0}
-                      className={`flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg transition-all btn-luxury ${
-                        activeLLMs.length === 0 
-                        ? 'opacity-50 cursor-not-allowed grayscale' 
-                        : 'hover:scale-105'
-                      }`}
+                      disabled={isButtonDisabled}
+                      className={isButtonDisabled ? disabledButtonStyle : goldButtonStyle}
+                      style={isButtonDisabled ? {} : luxuriousShadow}
                     >
                       <AppWindow className="w-4 h-4" />
                       <span className="hidden sm:inline">Openall Popups</span>
@@ -985,28 +998,6 @@ function App() {
       </div>
 
       <style>{`
-        /* Luxurious Gold Button Style */
-        .btn-luxury {
-          background: linear-gradient(45deg, #FFD700, #FDB931, #FFFFFF, #FDB931, #FFD700);
-          background-size: 200% auto;
-          color: #2e2810; /* Dark text */
-          border: 1px solid #c5a028;
-          box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
-          animation: shine 4s linear infinite;
-          text-shadow: 0px 1px 0px rgba(255,255,255,0.4);
-        }
-        
-        .btn-luxury:hover {
-          background-position: right center;
-          box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
-        }
-
-        @keyframes shine {
-          to {
-            background-position: 200% center;
-          }
-        }
-
         /* Forces GPU usage to prevent repaint lag */
         .will-change-transform {
           will-change: transform;
