@@ -76,6 +76,7 @@ const ALL_LLMS = [
   { id: 'mengzi', name: 'MengziGPT', url: 'https://www.langboat.com/', icon: 'https://th.bing.com/th/id/ODF.a6ilhgynSs7MQw0IFpJ_6Q?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2', category: 'Chinese' },
   { id: 'ai-bot', name: 'Ai-Bot', url: 'https://ai-bot.cn/', icon: 'https://th.bing.com/th/id/ODF.7rVHM7_ALjhaRch5au9pTA?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2', category: 'Chinese' },
   { id: 'AIBOT', name: 'AIBOT', url: 'https://www.aibotcn.com/', icon: 'https://th.bing.com/th/id/ODF.bRKPsqfqY7dynQ9Rrpbraw?w=32&h=32&qlt=91&pcl=fffffa&o=6&pid=1.2', category: 'Chinese' },
+  { id: '懂 AI', name: '懂 AI', url: 'https://www.dongaigc.com/', icon: 'https://www.dongaigc.com/images/logo-web.png', category: 'Chinese' },
   
   // Indian AI Platforms
   { id: 'bharatgpt', name: 'BharatGPT', url: 'https://bharatgpt.ai/', icon: 'https://th.bing.com/th/id/ODF.V3TAgJQBL9pmhK-fXnHgVg?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2', category: 'Indian' },
